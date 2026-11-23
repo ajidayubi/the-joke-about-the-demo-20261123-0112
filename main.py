@@ -17,6 +17,10 @@ def main() -> None:
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(text)
+    # Verify the write landed exactly: re-read and compare.
+    with open("/output/entry.txt", "r", encoding="utf-8") as f:
+        written = f.read()
+    assert written == text, "entry.txt does not match the joke"
 
 
 if __name__ == "__main__":
